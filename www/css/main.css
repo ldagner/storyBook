@@ -59,6 +59,11 @@ video {
    Main styles
    ========================================================================== */
 
+.main-width {
+    width: 640px;
+    margin: 0 auto;
+    position: relative;
+}
 .top-panel {
     width: 100%;
     min-height: 60px;
@@ -113,46 +118,144 @@ video {
 .page {
     position: relative;
     height: 100%;
+    overflow: hidden;
 }
 .page > img {
     display: block;
-    position: absolute;
     width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 1;
 }
 .page .text-content {
     position: relative;
     z-index: 2;
     line-height: normal;
+    color: #fff;
+    padding: 15px 15px 8px;
+    text-align: center;
+    overflow: hidden;
 }
-.cover .text-content {
+.page .text-content h1 {
+    margin-bottom: 5px;
+    max-height: 440px;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Page types
+   ========================================================================== */
+
+/* Cover */
+.page.cover img, .page.full-image img {
+    height: 100%;
+    width: auto;
+    max-width: none;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 1;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.page.cover .text-content {
     bottom: 70px;
-    color: #ffffff;
     font-size: 20px;
     left: 0;
     line-height: 40px;
     position: absolute;
-    text-align: center;
     width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.main-width {
-    width: 640px;
-    margin: 0 auto;
+/* Round image */
+.page.round-image {
+    background: #00cfc4;
+}
+.page.round-image > img {
+    margin: 23% 10% 10%;
+    width: 256px;
+    height: 256px;
+    -webkit-border-radius: 256px;
+    -moz-border-radius: 256px;
+    border-radius: 256px;
+}
+
+/* Square image */
+.page.square-image > img {
+    height: 320px;
+    left: 50%;
+    max-width: none;
     position: relative;
+    width: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.page.square-image .text-content, .page.quote .text-content {
+    color: #000;
+}
+.page.square-image .text-content {
+    height: 222px;
+}
+.page.square-image .text-content > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+.page.square-image .text-content:before {
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    margin-left: -0.25em;
+    vertical-align: middle;
+    width: 0;
+}
+
+/* Quote page */ 
+.page.quote .text-content {
+    background: url('../img/bottom-quotes.png') no-repeat center bottom;
+    font-size: 36px;
+    top: 50%;
+    padding: 50px 20px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.page.quote .text-content:before {
+    background: url("../img/top-quotes.png") no-repeat center top;
+    content: " ";
+    display: block;
+    width: 100%;
+    height: 31px;
+    position: absolute;
+    left: 5px;
+    top: 0;
+}
+.page.quote .text-content > p {
+    max-height: 420px;
+    overflow: hidden;
+}
+
+/* Full image */
+.page.full-image .text-content {
+    display: none;
 }
 
 
-.last-page {
+.back-cover {
     left: 640px !important;
     width: 0 !important;
 }
-.last-page-2 {
+.last-page {
     width: 320px !important;
 }
-.last-page.ui-draggable ~ .b-controls .b-next {
+.back-cover.ui-draggable ~ .b-controls .b-next {
     display: none !important;
 }
 

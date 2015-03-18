@@ -1,15 +1,19 @@
 $(document).ready(function () {
     var domain = 'http://193.46.86.147/';
+    var user_id = '0a38acb7-21df-4cff-a650-1450d13450d8';
+    var storybook_id = '172';
     
     $.ajax({
         url: "../api.php",
         dataType: "json",
         data: {
             domain: domain,
-            path: '/users/0a38acb7-21df-4cff-a650-1450d13450d8/flip_books/172/flip_book_pages'
+            path: '/users/' + user_id + '/flip_books/' + storybook_id + '/flip_book_pages'
         }
     }).done(function(data) {
+        page_content = '';
         $.each(data.data, function(i, data) {
+            position = data.position;
             switch(data.page_type ) {
                 case 0:
                     page_type = "cover";
@@ -31,18 +35,27 @@ $(document).ready(function () {
                     break;
             }
             
-            var img = data.image_url != null ? '<img src="' + domain + data.image_url + '" alt="">' : '';
-            var page_content = [
+            var media = '';
+            if (data.image_url !== null && data.video_url === null) {
+                media = '<img src="' + domain + data.image_url + '" alt="">';
+            } else if (data.video_url !== null) {
+                media = '<video type="' + data.video_multimedia_content_type + '" webkit-playsinline="" loop="" preload="" src="' + domain + data.video_url + '" style="width: 100%;"></video>';
+            }
+            var title = data.title !== '' ? '<h1 class="title">' + data.title + '</h1>' : '';
+            var content = data.content !== '' ? '<p>' + data.content + '</p>' : '';
+            
+            page_content += [
                 '<div class="page ' + page_type + '">',
-                     img,
-                '    <p>This domain is established to be used for illustrative examples in documents. You may use this',
-                '    domain in examples without prior coordination or asking for permission.</p>',
-                '    <p><a href="http://www.iana.org/domains/example">More information...</a></p>',
+                     media,
+                    '<div class="text-content">',
+                        title,
+                        content,
+                     '</div>',
                 '</div>'
             ].join('');
-            
-            $(page_content).appendTo("#storybook");
         });
+        console.log(position);
+        $(page_content).appendTo("#storybook");
     }).complete(function() {
         $("#storybook").booklet({
             width: 640,
@@ -52,13 +65,16 @@ $(document).ready(function () {
             arrows: true,
             pagePadding: 0,
             next: '#next',
-            prev: '#prev'
+            prev: '#prev',
+            change: function(event, data) {
+                if ($(data.pages).hasClass('video')) {
+                    $(this).find('video')[0].play();
+                } else {
+                    $('.video video')[0].pause();
+                }
+            }
         });
+        $('.b-page-blank').parents('.b-page').addClass('back-cover');
+        $('.b-page-blank').parents('.b-page').prev().addClass('last-page');
     });
 });
-
-
-
-
-$('.b-page-blank').parents('.b-page').addClass('last-page');
-$('.b-page-blank').parents('.b-page').prev().addClass('last-page-2');
