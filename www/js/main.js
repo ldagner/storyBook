@@ -12,6 +12,9 @@ $(document).ready(function () {
         }
     }).done(function(data) {
         page_content = '';
+        book_content = [];
+        pages = [];
+        
         $.each(data.data, function(i, data) {
             position = data.position;
             switch(data.page_type ) {
@@ -39,13 +42,13 @@ $(document).ready(function () {
             if (data.image_url !== null && data.video_url === null) {
                 media = '<img src="' + domain + data.image_url + '" alt="">';
             } else if (data.video_url !== null) {
-                media = '<video type="' + data.video_multimedia_content_type + '" webkit-playsinline="" loop="" preload="" src="' + domain + data.video_url + '" style="width: 100%;"></video>';
+                media = '<video type="' + data.video_multimedia_content_type + '" webkit-playsinline="" loop="" preload="" src="' + domain + data.video_url + '"></video>';
             }
             var title = data.title !== '' ? '<h1 class="title">' + data.title + '</h1>' : '';
             var content = data.content !== '' ? '<p>' + data.content + '</p>' : '';
             
-            page_content += [
-                '<div class="page ' + page_type + '">',
+            page_content = [
+                '<div class="page number-' + position + ' ' + page_type + '">',
                      media,
                     '<div class="text-content">',
                         title,
@@ -53,9 +56,21 @@ $(document).ready(function () {
                      '</div>',
                 '</div>'
             ].join('');
+            
+            book_content.push({
+                page: position,
+                content: page_content
+            });
+            book_content.sort(function (a,b) {
+                return a.page > b.page;   
+            });
         });
-        console.log(position);
-        $(page_content).appendTo("#storybook");
+        
+        $(book_content).each(function(){
+            pages.push(this.content);
+        });
+        $(pages.join('')).prependTo("#storybook");
+        
     }).complete(function() {
         $("#storybook").booklet({
             width: 640,
@@ -64,6 +79,7 @@ $(document).ready(function () {
             pageNumbers: false,
             arrows: true,
             pagePadding: 0,
+            hoverWidth: 0,
             next: '#next',
             prev: '#prev',
             change: function(event, data) {

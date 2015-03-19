@@ -247,6 +247,11 @@ video {
     display: none;
 }
 
+/* Page with video*/
+.page.video video {
+    width: 100%;
+}
+
 
 .back-cover {
     left: 640px !important;
