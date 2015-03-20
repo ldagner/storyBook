@@ -159,7 +159,7 @@ video {
     transform: translateX(-50%);
 }
 .page.cover .text-content {
-    bottom: 70px;
+    bottom: 12%;
     font-size: 1.25rem;
     left: 0;
     line-height: 40px;
