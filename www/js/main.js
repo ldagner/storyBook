@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    ratio = 640 / 572;
+    w_window = $(window).width() / 2;
+    h_window = w_window / ratio;
+    
+    $.smartbanner({
+            title: "Today's Parent Milestones",
+            author: 'Rogers Publishing Limited',
+            icon: 'http://a1.mzstatic.com/us/r30/Purple6/v4/d2/30/40/d230403c-0fbe-608c-48e2-6072b7c4f1a0/icon175x175.png',
+            price: 'FREE',
+            daysHidden: 15,
+            daysReminder: 90
+        });
+    
     var domain = 'http://193.46.86.147/';
     var user_id = '0a38acb7-21df-4cff-a650-1450d13450d8';
     var storybook_id = '172';
@@ -72,25 +85,29 @@ $(document).ready(function () {
         $(pages.join('')).prependTo("#storybook");
         
     }).complete(function() {
-        $("#storybook").booklet({
-            width: 640,
-            height: 572,
-            closed: true,
-            pageNumbers: false,
-            arrows: true,
-            pagePadding: 0,
-            hoverWidth: 0,
-            next: '#next',
-            prev: '#prev',
-            change: function(event, data) {
-                if ($(data.pages).hasClass('video')) {
-                    $(this).find('video')[0].play();
-                } else {
-                    $('.video video')[0].pause();
-                }
-            }
-        });
+        booklet(w_window, parseInt(h_window));
         $('.b-page-blank').parents('.b-page').addClass('back-cover');
         $('.b-page-blank').parents('.b-page').prev().addClass('last-page');
     });
 });
+
+function booklet(w, h) {
+    $("#storybook").booklet({
+        width: w,
+        height: h,
+        closed: true,
+        pageNumbers: false,
+        arrows: true,
+        pagePadding: 0,
+        hoverWidth: 0,
+        next: '#next',
+        prev: '#prev',
+        change: function(event, data) {
+            if ($(data.pages).hasClass('video')) {
+                $(this).find('video')[0].play();
+            } else {
+                $('.video video')[0].pause();
+            }
+        }
+    });
+}

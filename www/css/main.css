@@ -4,7 +4,7 @@
 
 html {
     color: #222;
-    font-size: 1em;
+    font-size: 16px;
     line-height: 1.4;
 }
 body {
@@ -30,8 +30,8 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
+    border-top: 2px solid #f1f1f1;
+    margin: 40px 0 55px;
     padding: 0;
 }
 
@@ -160,7 +160,7 @@ video {
 }
 .page.cover .text-content {
     bottom: 70px;
-    font-size: 20px;
+    font-size: 1.25rem;
     left: 0;
     line-height: 40px;
     position: absolute;
@@ -218,7 +218,7 @@ video {
 /* Quote page */ 
 .page.quote .text-content {
     background: url('../img/bottom-quotes.png') no-repeat center bottom;
-    font-size: 36px;
+    font-size: 2.25rem;
     top: 50%;
     padding: 50px 20px;
     -webkit-transform: translateY(-50%);
@@ -252,6 +252,23 @@ video {
     width: 100%;
 }
 
+/* Last page */
+.page.last-page {
+    padding: 50px 40px;
+    text-align: center;
+    display: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.b-page .page.last-page {
+    display: block;
+}
+.page.last-page > img {
+    display: inline;
+    width: auto;
+}
+
 
 .back-cover {
     left: 640px !important;
@@ -262,6 +279,56 @@ video {
 }
 .back-cover.ui-draggable ~ .b-controls .b-next {
     display: none !important;
+}
+
+
+/* -------- !Responsive Styles -------- */
+
+/*
+Small screens
+*/
+@media only screen and (max-width: 739px) { /* max-width 739px, mobile-only styles, use when QAing mobile issues */
+    .top-panel .app-links {
+        float: left;
+        margin: 11px;
+        position: static;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+    }
+    .top-panel .logo-wrapper {
+        float: left;
+        width: auto;
+    }
+    .top-panel .logo img {
+        margin-left: 10px;
+    }
+    .main-width {
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+/*
+Medium screens
+*/
+@media only screen and (min-width: 740px) and (max-width: 1240px) { /* min-width 740px and max-width 1240px, use when QAing tablet-only issues */
+    .top-panel .app-links {
+        float: left;
+        margin: 11px;
+        position: static;
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+    }
+    .top-panel .logo-wrapper {
+        float: left;
+        width: auto;
+    }
 }
 
 
@@ -295,7 +362,7 @@ video {
 .booklet .b-page-cover h3  {color:#fff; text-shadow:0 1px 3px #222;}
 
 /* Page Numbers */
-.booklet .b-counter {bottom:10px; position:absolute; display:block; width:25px; height:20px; background:#ccc; color:#444; text-align:center; font-family:Georgia, "Times New Roman", Times, serif; font-size:10px; padding:5px 0 0;}
+.booklet .b-counter {bottom:10px; position:absolute; display:block; width:25px; height:20px; background:#ccc; color:#444; text-align:center; font-family:Georgia, "Times New Roman", Times, serif; font-size:0.625rem; padding:5px 0 0;}
 .booklet .b-wrap-left  .b-counter  {left:10px;}
 .booklet .b-wrap-right .b-counter {right:10px;}
 
@@ -312,7 +379,7 @@ video {
 .booklet .b-overlay-next {right:0;}
 
 /* Tab Controls */
-.booklet .b-tab        {background:#000; height:40px; width:100%; padding:10px 0 0; text-align:center; color:#ccc; position:absolute; font-size:11px;}
+.booklet .b-tab        {background:#000; height:40px; width:100%; padding:10px 0 0; text-align:center; color:#ccc; position:absolute; font-size:0.6875rem;}
 .booklet .b-tab-prev   {left:0;}
 .booklet .b-tab-next   {right:0;}
 .booklet .b-tab:hover  {background:#aaa; color:#000;}	
