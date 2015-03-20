@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    ratio = 640 / 572;
-    w_window = $(window).width() / 2;
-    h_window = w_window / ratio;
-    
     $.smartbanner({
             title: "Today's Parent Milestones",
             author: 'Rogers Publishing Limited',
@@ -85,7 +81,7 @@ $(document).ready(function () {
         $(pages.join('')).prependTo("#storybook");
         
     }).complete(function() {
-        booklet(w_window, parseInt(h_window));
+        booklet(640, 572);
         $('.b-page-blank').parents('.b-page').addClass('back-cover');
         $('.b-page-blank').parents('.b-page').prev().addClass('last-page');
     });

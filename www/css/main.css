@@ -66,6 +66,7 @@ video {
 }
 .top-panel {
     width: 100%;
+    min-width: 640px;
     min-height: 60px;
     position: relative;
     background: #fff;
@@ -96,6 +97,7 @@ video {
 
 .main-container {
     width: 100%;
+    min-width: 640px;
     height: 570px;
     padding: 55px 0 0;
     background: url("../img/main-bg.png") no-repeat left top / 100% auto;
@@ -306,8 +308,15 @@ Small screens
         margin-left: 10px;
     }
     .main-width {
-        width: 100%;
         overflow: hidden;
+    }
+    #prev, #next, .booklet .b-arrow {
+        background: none;
+        left: 0;
+    }
+    #next, .booklet .b-arrow-next {
+        left: auto;
+        right: 0;
     }
 }
 
