@@ -99,11 +99,24 @@ function booklet(w, h) {
         next: '#next',
         prev: '#prev',
         change: function(event, data) {
-            if ($(data.pages).hasClass('video')) {
-                $(this).find('video')[0].play();
+            if ($(data.pages).find('video').length !== 0) {
+                $(data.pages).find('video')[0].play();
             } else {
-                $('.video video')[0].pause();
+                $('video')[0].pause();
             }
         }
+    });
+    
+    var videos = [];
+    videos = $('video');
+    $('html').one('click', function() {
+        for (i=0; i < videos.length; i++) {
+            videos[i].play();
+        }
+        setTimeout(function(){
+            for (i=0; i < videos.length; i++) {
+                videos[i].pause();
+            }
+        }, 10);
     });
 }
