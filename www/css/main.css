@@ -66,7 +66,6 @@ video {
 }
 .top-panel {
     width: 100%;
-    min-width: 640px;
     min-height: 60px;
     position: relative;
     background: #fff;
@@ -97,7 +96,6 @@ video {
 
 .main-container {
     width: 100%;
-    min-width: 640px;
     height: 570px;
     padding: 55px 0 0;
     background: url("../img/main-bg.png") no-repeat left top / 100% auto;
@@ -176,18 +174,19 @@ video {
 .page.round-image {
     background: #00cfc4;
 }
+
 .page.round-image > img {
+    height: 45%;
     margin: 23% 10% 10%;
-    width: 256px;
-    height: 256px;
-    -webkit-border-radius: 256px;
-    -moz-border-radius: 256px;
-    border-radius: 256px;
+    width: 80%;
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    border-radius: 1000px;
 }
 
 /* Square image */
 .page.square-image > img {
-    height: 320px;
+    height: 56%;
     left: 50%;
     max-width: none;
     position: relative;
@@ -256,7 +255,7 @@ video {
 
 /* Last page */
 .page.last-page {
-    padding: 50px 40px;
+    padding: 15% 13%;
     text-align: center;
     display: none;
     -webkit-box-sizing: border-box;
@@ -267,8 +266,8 @@ video {
     display: block;
 }
 .page.last-page > img {
-    display: inline;
     width: auto;
+    margin: 0 auto;
 }
 
 
@@ -276,8 +275,8 @@ video {
     left: 640px !important;
     width: 0 !important;
 }
-.last-page {
-    width: 320px !important;
+.b-page .last-page {
+    width: 100% !important;
 }
 .back-cover.ui-draggable ~ .b-controls .b-next {
     display: none !important;
@@ -290,6 +289,13 @@ video {
 Small screens
 */
 @media only screen and (max-width: 739px) { /* max-width 739px, mobile-only styles, use when QAing mobile issues */
+    .booklet {
+        margin: 0 !important;
+        width: 100%;
+    }
+    .main-width {
+        width: 100%;
+    }
     .top-panel .app-links {
         float: left;
         margin: 11px;
@@ -317,6 +323,12 @@ Small screens
     #next, .booklet .b-arrow-next {
         left: auto;
         right: 0;
+    }
+    hr {
+        margin: 17% 0 23%;
+    }
+    .page.last-page > img {
+        width: 52%;
     }
 }
 

@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    ratio = 1.118881118881119;
+    
+    booklet_width = 640;
+    booklet_height = 572;
+    
+    if ($(window).width() <= 739) {
+        booklet_width = $(window).width();
+        booklet_height = parseInt(booklet_width / ratio);
+    }
+    
     $.smartbanner({
             title: "Today's Parent Milestones",
             author: 'Rogers Publishing Limited',
@@ -81,7 +91,7 @@ $(document).ready(function () {
         $(pages.join('')).prependTo("#storybook");
         
     }).complete(function() {
-        booklet(640, 572);
+        booklet(booklet_width, booklet_height);
         $('.b-page-blank').parents('.b-page').addClass('back-cover');
         $('.b-page-blank').parents('.b-page').prev().addClass('last-page');
     });
