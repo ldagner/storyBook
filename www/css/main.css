@@ -100,8 +100,7 @@ video {
     padding: 55px 0 0;
     background: url("../img/main-bg.png") no-repeat left top / 100% auto;
 }
-#prev, #next, .booklet .b-arrow {
-    background: url("../img/prev-next.png") no-repeat 10px center;
+.booklet .b-arrow {
     cursor: pointer;
     height: 100%;
     position: absolute;
@@ -110,8 +109,11 @@ video {
     width: 46px;
     display: none;
 }
-#next, .booklet .b-arrow-next {
-    background-position: -36px center;
+.booklet .b-arrow-prev {
+    background: url("../img/prev.png") no-repeat center center;
+}
+.booklet .b-arrow-next {
+    background: url("../img/next.png") no-repeat center center;
     left: auto;
     right: -45px;
 }
@@ -201,7 +203,10 @@ video {
     color: #000;
 }
 .page.square-image .text-content {
-    height: 222px;
+    height: 44%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 .page.square-image .text-content > * {
     display: inline-block;
@@ -289,13 +294,6 @@ video {
 Small screens
 */
 @media only screen and (max-width: 739px) { /* max-width 739px, mobile-only styles, use when QAing mobile issues */
-    .booklet {
-        margin: 0 !important;
-        width: 100%;
-    }
-    .main-width {
-        width: 100%;
-    }
     .top-panel .app-links {
         float: left;
         margin: 11px;
@@ -313,22 +311,109 @@ Small screens
     .top-panel .logo img {
         margin-left: 10px;
     }
-    .main-width {
-        overflow: hidden;
-    }
-    #prev, #next, .booklet .b-arrow {
-        background: none;
-        left: 0;
-    }
-    #next, .booklet .b-arrow-next {
-        left: auto;
-        right: 0;
-    }
     hr {
         margin: 17% 0 23%;
     }
     .page.last-page > img {
         width: 52%;
+    }
+    
+    .main-container {
+        padding: 0;
+        height: auto;
+    }
+    .main-width {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #storybook {
+        height: 100%;
+        width: 80%;
+        position: relative;
+        margin: 0 auto !important;
+
+        -webkit-perspective: 2000px;
+        -moz-perspective: 2000px;
+        -ms-perspective: 2000px;
+        perspective: 2000px;
+
+        -webkit-perspective-origin: left center;
+        -moz-perspective-origin: left center;
+        -ms-perspective-origin: left center;
+        perspective-origin: left center
+    }
+    .page {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        backface-visibility: hidden;
+        visibility: visible;
+        background: #ffffff;
+        z-index: auto;
+        cursor: default;
+        position: absolute;
+
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        -o-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+
+        -webkit-transform-origin: left center 0;
+        -moz-transform-origin: left center 0;
+        -ms-transform-origin: left center 0;
+        -o-transform-origin: left center 0;
+        transform-origin: left center 0;
+
+        -webkit-transition:  visibility 0ms ease 0ms;
+        -moz-transition:  visibility 0ms ease 0ms;
+        -ms-transition: visibility 0ms ease 0ms;
+        -o-transition: visibility 0ms ease 0ms;
+        transition: visibility 0ms ease 0ms;
+    }
+    .page.has-turned {
+        visibility: hidden;
+
+/*        -webkit-transform: rotateY(-90deg);
+        -moz-transform: rotateY(-90deg);
+        -ms-transform: rotateY(-90deg);
+        -o-transform: rotateY(-90deg);
+        transform: rotateY(-90deg);
+
+*/        -webkit-transition-delay:  0ms, 350ms;
+        -moz-transition-delay:  0ms, 350ms;
+        -ms-transition-delay:  0ms, 350ms;
+        -o-transition-delay:  0ms, 350ms;
+        transition-delay:  0ms, 350ms;
+    }
+
+    .book-controls {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+    .book-controls button {
+        border: none;
+        padding: 0;
+        width: 10%;
+        height: 100%;
+        position: absolute;
+        outline: none !important;
+    }
+    .book-controls .page-prev {
+        right: 100%;
+        background: url("../img/prev.png") no-repeat center center;
+    }
+    .book-controls .page-next {
+        left: 100%;
+        background: url("../img/next.png") no-repeat center center;
+    }
+    #storybook.is-first-page .book-controls .page-prev {
+        display: none;
+    }
+    #storybook.is-last-page .book-controls .page-next {
+        display: none;
     }
 }
 
@@ -406,7 +491,7 @@ Medium screens
 .booklet .b-tab:hover  {background:#aaa; color:#000;}	
 
 /* Arrow Controls */
-.booklet .b-arrow div      {display:none; text-indent:-9999px; height:170px; width:74px; position:absolute; left:0; top:25%;}
+.booklet .b-arrow div      {display:none; text-indent:-9999px; height:170px; width:100%; position:absolute; left:0; top:25%;}
 
 /* @z-index fix (needed for older IE browsers)
 ----------------------------------------*/
