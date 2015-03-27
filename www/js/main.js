@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    var domain = 'http://193.46.86.147/';
+    var user_id = '0a38acb7-21df-4cff-a650-1450d13450d8';
+    var storybook_id = '6';
+    
     error_message = [
         '<div style="font-size:30px; text-align: center;">Ooops! Something went wrong! <br> PLease try again later. </div>'
     ].join('');
@@ -15,7 +19,7 @@ $(document).ready(function () {
                     '<button class="page-next"></button>',
                 '</div>'
         ].join('');
-    
+        
     $.smartbanner({
             title: "Today's Parent Milestones",
             author: 'Rogers Publishing Limited',
@@ -24,10 +28,6 @@ $(document).ready(function () {
             daysHidden: 15,
             daysReminder: 90
         });
-    
-    var domain = 'http://193.46.86.147/';
-    var user_id = '0a38acb7-21df-4cff-a650-1450d13450d8';
-    var storybook_id = '172';
     
     $.ajax({
         url: "../api.php",
@@ -154,6 +154,7 @@ function booklet(w, h) {
 }
 
 function flipPage() {
+    var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
     page = 1;
     total_pages = $('.page').length;
     flipPageSize();
@@ -171,10 +172,11 @@ function flipPage() {
     $('.book-controls .page-next').click(function() {
         if (1 <= page && page < total_pages) {
             $('#storybook .number-' + page + '').addClass('has-turned');
-            
-            $('#storybook .number-' + page + '').animateRotate(0, -90, 350, "linear", function() {
-                $('#storybook .number-' + (page - 1) + '').attr('style', '');
-            }).css({transition: 'none', WebkitTransition: 'none', visibility: 'visible'});
+            if (iOS) {
+                $('#storybook .number-' + page + '').animateRotate(0, -90, 350, "linear", function() {
+                    $('#storybook .number-' + (page - 1) + '').attr('style', '');
+                }).css({transition: 'none', WebkitTransition: 'none', visibility: 'visible'});
+            }
             page += 1;
             
             checkPages();
@@ -185,9 +187,11 @@ function flipPage() {
         if (1 < page && page <= total_pages) {
             page -= 1;
             $('#storybook .number-' + page + '').removeClass('has-turned');
-            $('#storybook .number-' + page + '').animateRotate(-90, 0, 350, "linear", function() {
-                $('#storybook .number-' + page + '').attr('style', '');
-            }).css({transition: 'none', WebkitTransition: 'none', visibility: 'visible'});
+            if (iOS) {
+                $('#storybook .number-' + page + '').animateRotate(-90, 0, 350, "linear", function() {
+                    $('#storybook .number-' + page + '').attr('style', '');
+                }).css({transition: 'none', WebkitTransition: 'none', visibility: 'visible'});
+            }
             checkPages();
             checkMediaContent(1);
         }
@@ -207,13 +211,13 @@ function flipPage() {
     }
     
     function checkMediaContent(op) {
-        if ($('.number-' + page + '.video video').length != 0) {
+        if ($('.number-' + page + '.video video').length != 0 && !iOS) {
             $('.number-' + page + '.video video')[0].play();
         }
         if ($('.number-' + (page + op) + '.video video').length != 0) {
             $('.number-' + (page + op) + '.video video')[0].pause();
         }
-        if ($('.number-' + page + '.audio audio').length != 0) {
+        if ($('.number-' + page + '.audio audio').length != 0 && !iOS) {
             $('.number-' + page + '.audio audio')[0].play();
         }
         if ($('.number-' + (page + op) + '.audio audio').length != 0) {
@@ -244,7 +248,7 @@ function sortPages(a,b) {
     }
 }
 
-$.fn.animateRotate = function(turn, angle, duration, easing, complete) { // Rotate animation for IE9
+$.fn.animateRotate = function(turn, angle, duration, easing, complete) {
     var args = $.speed(duration, easing, complete);
     var step = args.step;
     return this.each(function(i, e) {

@@ -254,8 +254,19 @@ video {
 }
 
 /* Page with video*/
+.page.video {
+    background: #000;
+}
 .page.video video {
     width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 /* Last page */
@@ -366,22 +377,22 @@ Small screens
         -o-transform-origin: left center 0;
         transform-origin: left center 0;
 
-        -webkit-transition:  visibility 0ms ease 0ms;
-        -moz-transition:  visibility 0ms ease 0ms;
-        -ms-transition: visibility 0ms ease 0ms;
-        -o-transition: visibility 0ms ease 0ms;
-        transition: visibility 0ms ease 0ms;
+        -webkit-transition: transform 350ms ease 0s, visibility 0ms ease 0ms;
+        -moz-transition: transform 350ms ease 0s, visibility 0ms ease 0ms;
+        -ms-transition: transform 350ms ease 0s, visibility 0ms ease 0ms;
+        -o-transition: transform 350ms ease 0s, visibility 0ms ease 0ms;
+        transition: transform 350ms ease 0s, visibility 0ms ease 0ms;
     }
     .page.has-turned {
         visibility: hidden;
 
-/*        -webkit-transform: rotateY(-90deg);
+        -webkit-transform: rotateY(-90deg);
         -moz-transform: rotateY(-90deg);
         -ms-transform: rotateY(-90deg);
         -o-transform: rotateY(-90deg);
         transform: rotateY(-90deg);
 
-*/        -webkit-transition-delay:  0ms, 350ms;
+        -webkit-transition-delay:  0ms, 350ms;
         -moz-transition-delay:  0ms, 350ms;
         -ms-transition-delay:  0ms, 350ms;
         -o-transition-delay:  0ms, 350ms;
