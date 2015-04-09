@@ -131,10 +131,12 @@ function booklet(w, h) {
         next: '#next',
         prev: '#prev',
         change: function(event, data) {
-            if ($(data.pages).find('video').length !== 0) {
-                $(data.pages).find('video')[0].play();
-            } else {
-                $('video')[0].pause();
+            if ($('video').length !== 0) {
+                if ($(data.pages).find('video').length !== 0) {
+                    $(data.pages).find('video')[0].play();
+                } else {
+                    $('video')[0].pause();
+                }
             }
         }
     });
@@ -211,17 +213,21 @@ function flipPage() {
     }
     
     function checkMediaContent(op) {
-        if ($('.number-' + page + '.video video').length != 0 && !iOS) {
-            $('.number-' + page + '.video video')[0].play();
+        if ($('video').length !== 0) {
+            if ($('.number-' + page + '.video video').length != 0 && !iOS) {
+                $('.number-' + page + '.video video')[0].play();
+            }
+            if ($('.number-' + (page + op) + '.video video').length != 0) {
+                $('.number-' + (page + op) + '.video video')[0].pause();
+            }
         }
-        if ($('.number-' + (page + op) + '.video video').length != 0) {
-            $('.number-' + (page + op) + '.video video')[0].pause();
-        }
-        if ($('.number-' + page + '.audio audio').length != 0 && !iOS) {
-            $('.number-' + page + '.audio audio')[0].play();
-        }
-        if ($('.number-' + (page + op) + '.audio audio').length != 0) {
-            $('.number-' + (page + op) + '.audio audio')[0].pause();
+        if ($('audio').length !== 0) {
+            if ($('.number-' + page + '.audio audio').length != 0 && !iOS) {
+                $('.number-' + page + '.audio audio')[0].play();
+            }
+            if ($('.number-' + (page + op) + '.audio audio').length != 0) {
+                $('.number-' + (page + op) + '.audio audio')[0].pause();
+            }
         }
     }
     
